@@ -1,22 +1,21 @@
 
 
 from requests.api import request
-import pytest
 import requests
 from unittest.mock import patch
 from functools import partial
 import sys
 import unittest
-
+from bs4 import BeautifulSoup as bs4
 class mock_request:
     text = "0"
 
-
-
-class TestCalc(unittest.TestCase):
+class TestRequests(unittest.TestCase):
     
     def request_ricoh(self):
+        f = open(r"tests\mockpages\demofile.html", "r")
         mockobj = mock_request()  
+        mockobj.text = f
         return mockobj
   
     @patch('requests.get', request_ricoh)
