@@ -14,42 +14,96 @@ class Printer:
         self.pageCounter_bw = 0
 
     def IntroduceYoursfelf(self):
-        temp_str = ""
-        temp_str += "Nazwa: " + self.name + " Model: " + self.model
-        temp_str += "\nIP: " + self.ip
-        return temp_str;
+        message = ""
+        message += "Nazwa: " + self.name + " Model: " + self.model
+        message += "\nIP: " + self.ip
+        print(message)
+
+    def GetResponse(self, url):
+        response = requests.get(url).text
+        return response
+           
 
 class Ricoh(Printer):
+    
+    def calculateFromPx(self, x):
+        return int((int(x) / 162) * 100)
+    
+    def calculateInkQuantity(self, bars):
+        for i, color in enumerate("KCMY"):
+            try:
+                x = bars[i].get("width")
+                self.toners[color] = self.calculateFromPx(x)
+            except:
+                self.toners[color] = 0  
+                
+    def Refresh(self):
+        self.IntroduceYoursfelf()
+        #response = self.GetResponse(f"http://{self.ip}/web/guest/pl/websys/webArch/topPage.cgi").text
+        response = requests.get(f"http://{self.ip}/web/guest/pl/websys/webArch/topPage.cgi").text
+
+        soup = bs4(response, "html.parser")
+        print("Parsed...")
+        bars = soup.find_all("img", {"height": "20"})
+        print("After Find...")
+        self.calculateInkQuantity(bars)
+
+        response = requests.get(f"http://{self.ip}/web/guest/pl/websys/status/getUnificationCounter.cgi").text
+        
+        soup = bs4(response, "html.parser")
+        counter = soup.find_all("tr", {"class" : "staticProp"})[1]
+        
+        soup = bs4(str(counter), "html.parser")
+        counter = soup.find_all("td")[3].contents[0]
+        
+        self.pageCounter = int(str(counter).strip())
+        print("\n")
+
+
+
+
+
+class Ricoh2000(Ricoh):
     def Refresh(self):
         try:
-            introduce = self.IntroduceYoursfelf()
-            print(introduce)
+            try:
+                self.IntroduceYoursfelf()
+                response = requests.get(f"http://{self.ip}/web/guest/pl/websys/webArch/getStatus.cgi").text
+                soup = bs4(response, "html.parser")
+                print("Parsed...")
+                
+                bars = soup.find_all("img", {"class": "ver-algn-m mgn-R5p bdr-1px-666"})
+                print("After Find...")
+                
+                print(len(bars))
+                self.calculateInkQuantity(bars)
 
-            response = requests.get(f"http://{self.ip}/web/guest/pl/websys/webArch/topPage.cgi").text
-            soup = bs4(response, "html.parser")
-            bars = soup.find_all("img", {"height": "20"})
 
-            for i, color in enumerate("KCMY"):
-                try:
-                    self.toners[color] = int((int(bars[i].get("width")) / 162) * 100)
-                except:
-                    self.toners[color] = 0
+                response = requests.get(f"http://{self.ip}/web/guest/pl/websys/status/getUnificationCounter.cgi").text
+                soup = bs4(response, "html.parser")
 
-            response = requests.get(f"http://{self.ip}/web/guest/pl/websys/status/getUnificationCounter.cgi").text
-            soup = bs4(response, "html.parser")
-            counter = soup.find_all("tr", {"class" : "staticProp"})[1]
-            soup = bs4(str(counter), "html.parser")
-            counter = soup.find_all("td")[3].contents[0]
-            self.pageCounter = int(str(counter).strip())
+                counter = soup.find_all("tr", {"class" : "staticProp"})[1]
+                soup2 = bs4(str(counter), "html.parser")
+                counter = soup2.find_all("td")[3].contents[0]
+                self.pageCounter = int(str(counter).strip())
+            except IndexError:
+                counter = soup.find_all("tr", {"class" : "staticProp"})[2]
+                self.pageCounter = int(str(counter)[176:-19].strip())
+
+                counter = soup.find_all("td", {"width": "100", "colspan": "1"})
+
+                self.pageCounter_color = int(str(counter[16].contents[0])) + int(str(counter[36].contents[0])) + int(str(counter[51].contents[0]))
+                self.pageCounter_bw = int(str(counter[21].contents[0])) + int(str(counter[41].contents[0]))
             print("\n")
         except:
             print("Problem")
 
+
+
 class Brother(Printer):
     def Refresh(self):
         try:
-            introduce = self.IntroduceYoursfelf()
-            print(introduce)
+            self.IntroduceYoursfelf()
 
             response = requests.get(f"http://{self.ip}/general/status.html").text
             soup = bs4(response, "html.parser")
@@ -74,8 +128,7 @@ class Brother(Printer):
 class Lexmark(Printer):
     def Refresh(self):
         try:
-            introduce = self.IntroduceYoursfelf()
-            print(introduce)
+            self.IntroduceYoursfelf()
             response = requests.get(f"http://{self.ip}/cgi-bin/dynamic/printer/PrinterStatus.html").text
             soup = bs4(response, "html.parser")
             bars = soup.find_all("td", {"bgcolor": "#000000"})
@@ -102,43 +155,27 @@ class Lexmark(Printer):
         except:
             print("Problem")
 
-class Ricoh2000(Printer):
+
+class LexmarkColor(Printer):
     def Refresh(self):
         try:
-            try:
-                introduce = self.IntroduceYoursfelf()
-                print(introduce)
-                response = requests.get(f"http://{self.ip}/web/guest/pl/websys/webArch/getStatus.cgi").text
-                soup = bs4(response, "html.parser")
-                bars = soup.find_all("img", {"class": "ver-algn-m mgn-R5p bdr-1px-666"})
+            self.IntroduceYoursfelf()
+            response = requests.get(f"http://{self.ip}/cgi-bin/dynamic/printer/PrinterStatus.html").text
+            soup = bs4(response, "html.parser")
+            k = soup.find("td", {"bgcolor": "#000000"})
+            self.toners["K"] = int(k.get("width").replace("%", ""))
 
-                print(len(bars))
-                for i, color in enumerate("KCMY"):
-                    try:
-                        self.toners[color] = int((int(bars[i].get("width")) / 162) * 100)
-                    except:
-                        self.toners[color] = 0
+            c = soup.find("td", {"bgcolor": "#00ffff"})
+            self.toners["C"] = int(c.get("width").replace("%", ""))
 
+            m = soup.find("td", {"bgcolor": "#ff00ff"})
+            self.toners["M"] = int(m.get("width").replace("%", ""))
 
-                response = requests.get(f"http://{self.ip}/web/guest/pl/websys/status/getUnificationCounter.cgi").text
-                soup = bs4(response, "html.parser")
-
-                counter = soup.find_all("tr", {"class" : "staticProp"})[1]
-                soup2 = bs4(str(counter), "html.parser")
-                counter = soup2.find_all("td")[3].contents[0]
-                self.pageCounter = int(str(counter).strip())
-            except IndexError:
-                counter = soup.find_all("tr", {"class" : "staticProp"})[2]
-                self.pageCounter = int(str(counter)[176:-19].strip())
-
-                counter = soup.find_all("td", {"width": "100", "colspan": "1"})
-
-                self.pageCounter_color = int(str(counter[16].contents[0])) + int(str(counter[36].contents[0])) + int(str(counter[51].contents[0]))
-                self.pageCounter_bw = int(str(counter[21].contents[0])) + int(str(counter[41].contents[0]))
+            y = soup.find("td", {"bgcolor": "#ffff00"})
+            self.toners["Y"] = int(y.get("width").replace("%", ""))
             print("\n")
         except:
-            print("Problem")
-
+            print("\n")
 
 
 class HP(Printer):
@@ -168,27 +205,6 @@ class HP(Printer):
         except:
             print("\n")
 
-class LexmarkColor(Printer):
-    def Refresh(self):
-        try:
-            introduce = self.IntroduceYoursfelf()
-            print(introduce)
-            response = requests.get(f"http://{self.ip}/cgi-bin/dynamic/printer/PrinterStatus.html").text
-            soup = bs4(response, "html.parser")
-            k = soup.find("td", {"bgcolor": "#000000"})
-            self.toners["K"] = int(k.get("width").replace("%", ""))
-
-            c = soup.find("td", {"bgcolor": "#00ffff"})
-            self.toners["C"] = int(c.get("width").replace("%", ""))
-
-            m = soup.find("td", {"bgcolor": "#ff00ff"})
-            self.toners["M"] = int(m.get("width").replace("%", ""))
-
-            y = soup.find("td", {"bgcolor": "#ffff00"})
-            self.toners["Y"] = int(y.get("width").replace("%", ""))
-            print("\n")
-        except:
-            print("\n")
 
 
 bort = Ricoh("Ricoh MP C2051", "BORT Guido", "192.168.20.28")

@@ -1,27 +1,18 @@
-
-
 from requests.api import request
 import requests
 from unittest.mock import patch
-from functools import partial
-import sys
+
 import unittest
 from bs4 import BeautifulSoup as bs4
-class mock_request:
-    text = "0"
+from mocks import mock_request
 
 class TestRequests(unittest.TestCase):
-    
-    def request_ricoh(self):
-        f = open(r"tests\mockpages\demofile.html", "r")
-        mockobj = mock_request()  
-        mockobj.text = f
-        return mockobj
-  
-    @patch('requests.get', request_ricoh)
-    def test_ricoh_request(self):
+
+    @patch('requests.get', mock_request.ricoh)
+    def test_ricoh(self):
         response = requests.get(f"http:///web/guest/pl/websys/webArch/topPage.cgi").text
-        print(response)
+        self.assertNotEquals(response.count, 0)
+        #print(response)
 
         
 if __name__ == '__main__':
