@@ -1,0 +1,33 @@
+.standard{ font-size:12px; font-style:normal; font-weight:normal; }
+
+body{ background-color:#DFEAF5; margin: 0; border:0; font-family: osaka, verdana, arial, helvetica, sans-serif, 'MS UI Gothic'; }
+body.errorMessage{ background-color:#FBF0F1; margin:0; border:0; }
+
+A:link		{text-decoration:none; color:#161991;}
+A:visited	{text-decoration:none; color:#161991;}
+A:active	{text-decoration:none; color:#161991;}
+A:hover		{text-decoration:underline; color:#161991;}
+
+input, select, textarea{ font-family: osaka, verdana, arial, helvetica, sans-serif, 'MS UI Gothic'; }
+
+TR.staticProp{ font-size:12px; font-style:normal; font-weight:normal; text-align: left; vertical-align: middle; font-family: osaka, verdana, arial, helvetica, sans-serif, 'MS UI Gothic'; }
+
+TR.editProp{ font-size:12px; font-style:normal; font-weight:normal; text-align: left; vertical-align: middle; font-family: osaka, verdana, arial, helvetica, sans-serif, 'MS UI Gothic'; }
+
+TR.selectProp{ font-size:12px; font-style:normal; font-weight:normal; text-align: left; vertical-align: middle; font-family: osaka, verdana, arial, helvetica, sans-serif, 'MS UI Gothic'; }
+
+TR.optionProp{ font-size:12px; font-style:normal; font-weight:normal; text-align: left; vertical-align: middle; font-family: osaka, verdana, arial, helvetica, sans-serif, 'MS UI Gothic'; }
+
+.drawTitle{color:white; font-size:12px; font-style:normal; font-weight:normal;}
+
+A:link.commandLabel, A:visited.commandLabel { color: #161991; }
+A:hover.commandLabel { text-decoration:underline; color: #161991; }
+.commandLabel{font-size:12px; color:black}
+
+TR.responseMessage{ font-size:12px; font-style:normal; text-align: left; color: black;}
+
+TABLE.listHeader{ margin:0; padding:0; }
+TR.listHeader{ vertical-align:middle; margin:1px; }
+
+.listTitle{ color:#EEEEFF; font-size:12px; font-weight:normal; font-style:normal; vertical-align:middle; margin-top:2px; margin-bottom:2px; }
+.listData{ font-size:12px; font-weight:normal; font-style:normal; vertical-align:middle; padding-left:2px; padding-right:2px; }

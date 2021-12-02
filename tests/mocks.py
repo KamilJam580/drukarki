@@ -6,7 +6,11 @@ class mock_request:
 
 class mock_request:
 
-    def ricoh(self):
+    def pageCounter(self):
+        return 100000
+
+
+    def ricoh_selfMadePage(self):
         ricohgoodpage = r"tests\mockpages\ricoh\goodtoners.html"
         #f = open(r"tests\mockpages\demofile.html", "r", encoding="utf8").read()
         f = codecs.open(ricohgoodpage,
@@ -16,6 +20,15 @@ class mock_request:
         print("Ricoh Mock")
         return mockobj
 
+    def ricoh_goodPage1(self):
+        #ricohgoodpage = r"tests\mockpages\ricoh\goodtoners.html"
+        ricohgoodpage = r"tests\mockpages\021221\Bort\BORT-Guido - Web Image Monitor_files\topPage.html"        
+        f = codecs.open(ricohgoodpage,
+                        'r', encoding="utf8").read()
+        mockobj = mock_request()
+        mockobj.text = f
+        print("Ricoh Mock")
+        return mockobj
 
     def ricoh2000(self):
         ricoh2000goodpage = r"tests\mockpages\ricoh\goodtoners.html"

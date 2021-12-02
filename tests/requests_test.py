@@ -8,7 +8,7 @@ from mocks import mock_request
 
 class TestRequests(unittest.TestCase):
 
-    @patch('requests.get', mock_request.ricoh)
+    @patch('requests.get', mock_request.ricoh_selfMadePage)
     def test_ricoh(self):
         response = requests.get(f"http:///web/guest/pl/websys/webArch/topPage.cgi").text
         self.assertNotEquals(response.count, 0)

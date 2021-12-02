@@ -1,0 +1,21 @@
+// common.js	
+// for common scripts file
+
+//	ChangeImage
+function changeImage(imageList, regionId, srcId){
+		document.images[regionId].src = imageList[srcId].src;
+}
+
+
+//	For PageTitle
+//	help button
+var helpButton = new Array();
+	helpButton[0] = new Image();
+	helpButton[0].src = "/images/helpBtnSetting-r.gif";
+	helpButton[1] = new Image();
+	helpButton[1].src = "/images/helpBtnSetting.gif";
+
+function toHelp(target, filepath) {
+	var url = target+'/websys/webArch/help.cgi?ID='+filepath;
+	window.open(url,'new','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes');
+}
