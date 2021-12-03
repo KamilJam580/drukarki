@@ -1,0 +1,15 @@
+/*
+    	frame.css
+*/
+
+table.frame
+{
+  width: 100%; 
+  background-color: #dae5f3;
+}
+
+
+table.frame tr.rowLogoArea
+{
+  background-color: #ffffff; 
+}

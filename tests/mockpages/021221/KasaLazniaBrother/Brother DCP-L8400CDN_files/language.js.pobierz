@@ -1,0 +1,38 @@
+function changeLanguage(lang_elem, cookie_name)
+{
+var lang_obj = document.getElementById(lang_elem);
+var strurl = "";
+var strlang = "";
+wlang = lang_obj.options[lang_obj.selectedIndex].value;
+document.cookie = cookie_name + "=" + wlang + ";" + "path=/;";
+strlang = "weblang=" + wlang;
+strurl = location.href.replace(/weblang=[0-9]+/, strlang);
+if ( strurl == location.href ) {
+
+if ( -1 == location.search.indexOf("?", 0) ) {
+strurl = location.href + "?" + strlang;
+}
+else {
+strurl = location.href + "&" + strlang;
+}
+}
+location.href = strurl;
+return;
+}
+function loadLanguage(lang_elem, cookie_name)
+{
+var lang_obj = document.getElementById(lang_elem);
+var theSelected = getCookie(cookie_name);
+if (! theSelected )
+{
+theSelected = 0;
+}
+for (i=0; i< lang_obj.length; i++)
+{
+if (lang_obj.options[i].value == theSelected)
+{
+lang_obj.selectedIndex = i;
+}
+}
+return;
+}

@@ -1,0 +1,6 @@
+// reloadButton.js
+var reloadButton4Admin = new Array();
+	reloadButton4Admin[0]= new Image();
+	reloadButton4Admin[0].src = "/images/btnReload-r.gif";
+	reloadButton4Admin[1]= new Image();
+	reloadButton4Admin[1].src = "/images/btnReload.gif";

@@ -1,0 +1,252 @@
+function ajax_upload( form, callback )
+{
+	var frameName = 'ajax_upload';
+	var frameObj = $('<iframe name="' + frameName + '" style="position:absolute;top:-1000px" />');
+	$("body").append(frameObj);
+	$(form).attr("target",frameName);
+	
+	frameObj.load(
+		function() {
+			var content = frameObj.contents();
+			var data = $(content).find("html").html();
+			data = "<html>" + data + "</html>";
+			setTimeout(
+				function()
+				{
+					frameObj.remove();
+					if (callback) {
+						callback(data);
+					}
+				},0);
+			}
+		);
+	
+	form.submit();
+}
+
+function obj_Queue() {
+	this.array = new Array();
+	this.enque = function(obj)
+	{
+		this.array.push(obj);
+	};
+	this.deque = function()
+	{
+		if( this.array.length > 0 )
+		{
+			return this.array.shift();
+		}
+		return null;
+	};
+}
+
+var _g_ajaxReqQueue = new obj_Queue();
+
+var _g_ajax_connect = false;
+var _g_ajax_connect_timerid = 0;
+
+var _g_ajax_sending_req = null;
+
+var _g_form_submitDone = false;
+
+function _obj_ajaxReq(_url,_type,_data,_recv,_multipartData)
+{
+	this.url = _url;
+	this.type = _type;
+	this.data = _data;
+	this.recv = _recv;
+	this.multipartData = _multipartData;
+	this.xmlHttpReq = null;
+
+	this.send = function()
+	{
+		var contentType = "application/x-www-form-urlencoded; charset=UTF-8";
+		var sendData = this.data;
+		if( this.multipartData )
+		{
+			var boundary = "-----------------------------"+(new Date()).getTime();
+			contentType = "multipart/form-data; boundary="+boundary;
+			sendData = "";
+			jQuery.each(this.multipartData, function(name,val)
+			{
+				sendData += "--"+boundary+"\r\n";
+				sendData += "Content-Disposition: form-data; name=\""+name+"\"\r\n\r\n";
+				sendData += val+"\r\n";
+			}
+			);
+			sendData += "--"+boundary+"--\n";
+		}
+		var recvFunc = this.recv;
+		this.xmlHttpReq = $.ajax({
+			async:true,
+			url:this.url,
+			cache:false,
+			type:this.type,
+			data:sendData,
+			contentType:contentType,
+			dataType:"text",
+			processData:false,
+			success:function(recvData)
+			{
+				setTimeout(function()
+				{
+					if(recvData)
+					{
+						recvFunc(recvData);
+					}
+					_g_ajax_sending_req = null;
+					_ajax_send();
+				}
+				,0);
+			},
+			error:function(httpReq,textStatus,errorThrown)
+			{
+				if( httpReq.responseText )
+				{
+					document.write(httpReq.responseText);
+					document.close();
+				}
+			}
+		});
+		_g_ajax_sending_req = this;
+	};
+}
+
+function _ajax_send()
+{
+	if( _g_ajaxReqQueue.array.length > 0 )
+	{
+		setTimeout(_ajax_sendAction,100);
+	}
+}
+
+function _ajax_sendAction()
+{
+	if( null != _g_ajax_sending_req )
+	{
+		return;
+	}
+	_g_ajax_sending_req = _g_ajaxReqQueue.deque();
+	if( _g_ajax_sending_req )
+	{
+		_g_ajax_sending_req.send();
+	}
+}
+
+function _ajax_existCheck(ajaxReq)
+{
+	var idx = 0;
+	for( idx = 0; idx < _g_ajaxReqQueue.array.length; idx++ )
+	{
+		var req = _g_ajaxReqQueue.array[idx];
+		if( req )
+		{
+			if( ( req.url == ajaxReq.url )
+			 && ( req.data == ajaxReq.data )
+			  )
+			{
+				return true;
+			}
+		}
+	}
+	
+	if( null != _g_ajax_sending_req )
+	{
+		if( ( _g_ajax_sending_req.url == ajaxReq.url )
+		 && ( _g_ajax_sending_req.data == ajaxReq.data )
+		  )
+		{
+			return true;
+		}
+	}
+	
+	return false;
+}
+
+
+function _ajax_connectTest()
+{
+	$.ajax({
+		async:true,
+		url:"/websys/util/connectTest.cgi",
+		cache:false,
+		type:"POST",
+		data:"",
+		dataType:"text",
+		success:function(recvData)
+		{
+			if( 0 != _g_ajax_connect_timerid )
+			{
+				clearTimeout( _g_ajax_connect_timerid );
+				_g_ajax_connect_timerid = 0;
+				_g_ajax_connect = true;
+				_ajax_send();
+			}
+		},
+		error:function(httpReq,textStatus,errorThrown)
+		{
+			if( httpReq.responseText )
+			{
+				document.write(httpReq.responseText);
+				document.close();
+			}
+		}
+	});
+	
+	_g_ajax_connect_timerid = setTimeout(
+		function()
+		{
+			if( 0 != _g_ajax_connect_timerid )
+			{
+				_ajax_connectTest();
+			}
+		},
+		1000);
+}
+
+
+function ajax_async(_url,_type,_data,_recv,_multipartData)
+{
+	var exist = false;
+	var ajaxReq = new _obj_ajaxReq( _url,_type,_data,_recv,_multipartData );
+	exist = _ajax_existCheck(ajaxReq)
+	if( true == exist )
+	{
+		return;
+	}
+	_g_ajaxReqQueue.enque( ajaxReq );
+	if( false == _g_ajax_connect )
+	{
+		_ajax_connectTest();
+		return;
+	}
+	_ajax_send();
+}
+
+function form_Submit(form,url,method,target)
+{
+	if( _g_form_submitDone == false )
+	{
+		_g_form_submitDone = true;
+		form.action = url;
+		if( method )
+		{
+			form.method = method;
+		}
+		else
+		{
+			form.method = "post";
+		}
+		if( target )
+		{
+			form.target = target;
+		}
+		else
+		{
+			form.target = "_self";
+		}
+		form.submit();
+	}
+}
+
+

@@ -1,0 +1,212 @@
+
+<!-- saved from url=(0073)http://192.168.20.52/web/guest/pl/websys/status/getUnificationCounter.cgi -->
+<html xmlns:axsl="http://localhost" lang="pl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Licznik</title><style type="text/css"></style><style type="text/css">
+		table.defaultTableButton {
+			font-size:12px;
+			border-style: solid;
+			border-width: 1px;
+			border-color: #8D8D8D;
+			cursor:pointer;
+		}
+		table.defaultTableButton td.defaultTableButton {
+			padding: 0px 8px 0px 8px;
+			vertical-align: middle;
+			background-color: #808080;
+			background-image: URL(/images/buttonBGwhite.gif);
+			background-repeat: repeat-x;
+			text-align: center;
+			overflow: hidden;
+		}
+		table.defaultTableButtonSelected {
+			font-size:12px;
+			border-style: solid;
+			border-width: 1px;
+			border-color: #8D8D8D;
+			cursor:pointer;
+		}
+		table.defaultTableButtonSelected td.defaultTableButtonSelected {
+			padding: 0px 8px 0px 8px;
+			vertical-align: middle;
+			background-color: #F7EEB2;
+			text-align: center;
+			overflow: hidden;
+		}
+		table.defaultTableButton a.defaultTableButton {
+			text-decoration: none;
+			color: black;
+			white-space: nowrap;
+		}
+		table.defaultTableButtonSelected a.defaultTableButton {
+			text-decoration: none;
+			color: black;
+			white-space: nowrap;
+		}
+		table.defaultTableButton a.defaultTableCommandButton {
+			text-decoration: none;
+			font-weight: bold;
+			color: black;
+			white-space: nowrap;
+		}
+		table.defaultTableButtonSelected a.defaultTableCommandButton {
+			text-decoration: none;
+			font-weight: bold;
+			color: black;
+			white-space: nowrap;
+		}
+	</style><meta http-equiv="Content-Script-Type" content="text/javascript"><meta http-equiv="Cache-Control" content="no-cache"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="-1"><script language="JavaScript" src="./Licznik_files/common.js.pobierz" type="text/javascript"></script><script language="JavaScript" src="./Licznik_files/reload.js.pobierz" type="text/javascript"></script><link href="./Licznik_files/common.css" type="text/css" rel="stylesheet"><script language="Javascript" type="text/javascript">
+		function reloadPage(){
+			location.reload();
+		}
+	</script><script language="javascript" type="text/javascript">
+		var wsMenu_jumpUrl_control = "";
+
+		function wsMenu_jumpUrl(url, timeout) {
+			var urlMark="(".concat(url).concat(")");
+
+			if(timeout==0) { timeout=1000; }
+			if(wsMenu_jumpUrl_control.search(urlMark)==-1) {
+				wsMenu_jumpUrl_control=wsMenu_jumpUrl_control.concat(urlMark);
+				setTimeout("wsMenu_jumpUrl_enableLink('".concat(urlMark).concat("')"), timeout);
+				location = url;
+			}
+		}
+		function wsMenu_jumpUrl_enableLink(urlMark) {
+			wsMenu_jumpUrl_control=wsMenu_jumpUrl_control.replace(urlMark, "");
+		}
+		function wsMenu_jumpUrl_init() {
+			wsMenu_jumpUrl_control = "";
+		}
+	</script><script type="text/javascript" language="javascript">
+	
+	function menuParent_MouseOver(obj)
+	{
+		var selfMenu = $(obj);
+		var menus = selfMenu.parent().find(".li_menu");
+		var uls = selfMenu.find("ul");
+		var lastLi = selfMenu.find("li:last");
+		
+		menus.each(function()
+		{
+			if( selfMenu.get(0) != $(this).get(0) )
+			{
+				menuParent_MouseOut($(this).get(0));
+				mouseOutTransfer($(this).find("a.rollover"));
+			}
+		});
+		
+		uls.removeClass("display-n");
+		lastLi.css("borderBottom","none");
+		
+		var childs = selfMenu.find(".submenu li");
+		var clientwidth = 190;
+		if( !selfMenu.attr("widthCheck") )
+		{
+			childs.each(function()
+			{
+				if( $(this).width() > clientwidth )
+				{
+					clientwidth = $(this).width();
+				}
+			});
+			
+			childs.each(function()
+			{
+				$(this).width( clientwidth );
+				if( $(this).width() != clientwidth )
+				{
+					$(this).width( clientwidth + ( clientwidth - $(this).width() ) );
+				}
+			});
+			selfMenu.attr("widthCheck","complete");
+		}
+
+	}
+	function menuParent_MouseOut(obj)
+	{
+		var uls = $(obj).find("ul");
+		uls.addClass("display-n");
+	}
+	
+	function menuChild_MouseOver(obj)
+	{
+		var parent = $(obj).parents(".li_menu");
+		var a_parent = parent.find(".a_parent");
+		mouseOverTransfer(a_parent);
+	}
+	function menuChild_MouseOut(obj)
+	{
+		var parent = $(obj).parents(".li_menu");
+		var a_parent = parent.find(".a_parent");
+		mouseOutTransfer(a_parent);
+	}
+	
+var preReloadImage = new Array();
+var idx = 0;
+for( idx = 1; 7 > idx; idx++ )
+{
+	preReloadImage[idx] = new Image();
+	preReloadImage[idx].src = "/images/homemenu0"+idx+"-r.gif";
+}
+preReloadImage[idx] = new Image();
+preReloadImage[idx].src = "/images/homemenuarrow-r.gif";
+idx++;
+preReloadImage[idx] = new Image();
+preReloadImage[idx].src = "/images/homemenuSubBG-r.gif";
+
+	</script><style type="text/css">
+		table.menuTab {
+			font-size:12px;
+			border: 0px;
+		}
+		table.menuTab td.menuTab {
+			padding: 5px;
+			background-color: #D8E9FF;
+			border: 1px solid #afafaf;
+			overflow: hidden;
+			cursor:pointer;
+		}
+		table.menuTab td.menuTabSelected {
+			padding: 5px;
+			border-top: 1px solid #afafaf;
+			border-left: 1px solid #afafaf;
+			border-right:  1px solid #afafaf;
+			overflow: hidden;
+		}
+		table.menuTab a.menuTabSelectedText {
+			font-weight: bold;
+			color:black;
+			text-decoration:none;
+			cursor:default;
+		}
+		table.menuTab td.menuTabSpacer {
+			padding: 3px;
+			border-bottom: 1px solid #afafaf;
+		}
+	</style><meta http-equiv="Content-Script-Type" content="text/javascript"><meta http-equiv="Cache-Control" content="no-cache"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="-1"><script language="JavaScript" src="./Licznik_files/common.js.pobierz" type="text/javascript"></script><script language="JavaScript" src="./Licznik_files/reload.js.pobierz" type="text/javascript"></script><script language="JavaScript" src="./Licznik_files/ajax.js.pobierz" type="text/javascript"></script><link href="./Licznik_files/common.css" type="text/css" rel="stylesheet"><script language="Javascript" type="text/javascript">
+		function reloadPage(){
+			location.reload();
+		}
+	</script><script language="JavaScript" type="text/javascript">
+var buttonImg = new Array();
+	buttonImg[0]= new Image();
+	buttonImg[0].src = "/images/gotoPageTop.gif";
+	buttonImg[1]= new Image();
+	buttonImg[1].src = "/images/gotoPageTop-r.gif";
+</script><script language="javascript">
+				function onBodyLoad() {
+					
+					wsMenu_jumpUrl_init();
+				}
+
+				function langChange() {
+					var index;
+					var lang;
+					var urlLocation;
+
+					index = document.formChgLang.language.selectedIndex;
+					lang = document.formChgLang.language.options[index].value;
+					urlLocation = "../../../" + lang + "/websys/webArch/mainFrame.cgi";
+					top.location.replace(urlLocation);
+				}
+			</script></head><body onload="onBodyLoad();"><table border="0" width="100%" height="100%" cellspacing="0" cellpadding="0"><tbody><tr><td valign="top"><a href="http://192.168.20.52/web/guest/pl/websys/status/getUnificationCounter.cgi#link00"><img width="0" height="0" src="./Licznik_files/spacer.gif" border="0" alt="Pomiń menu i przejdź do głównej zawartości." title="Pomiń menu i przejdź do głównej zawartości."></a></td><td width="1px" bgcolor="#b8c0c7"><img src="./Licznik_files/spacer.gif" alt="" width="1" height="1" border="0" title=""></td><td width="100%" align="left" valign="top"><a name="link00"></a><table width="100%" height="30" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td></td><td><img src="./Licznik_files/spacer.gif" height="4" border="0" alt="" title=""></td><td></td></tr><tr><td><img src="./Licznik_files/spacer.gif" width="12" border="0" alt="" title=""></td><td nowrap="" width="100%" align="left" height="30"><table border="0" cellspacing="0" height="30" width="100%"><tbody><tr><td nowrap="" align="left" valign="middle" width="30%"><div style="color:black; font-size:16px; font-weight:bold;"><img src="./Licznik_files/spacer.gif" width="8" height="1" border="0" alt="" title="">Licznik</div></td><td></td><td width="10px"><img src="./Licznik_files/spacer.gif" width="10px" border="0" alt="" title=""></td><td nowrap="" align="right" valign="middle" width="20" height="20"><div class="commandLabel"><a class="commandLabel" onmouseover="changeImage(reloadButton4Admin,&#39;img9999-reload&#39;,0)" onmouseout="changeImage(reloadButton4Admin,&#39;img9999-reload&#39;,1)" href="javascript:wsMenu_jumpUrl(&#39;../../websys/status/getUnificationCounter.cgi&#39;)"><nobr><img border="0" src="./Licznik_files/btnReload.gif" name="img9999-reload" align="absmiddle" alt="" title="" height="20">Odśwież</nobr></a></div></td><td width="5px"><img src="./Licznik_files/spacer.gif" width="5px" border="0" alt="" title=""></td><form name="help"></form><input type="hidden" name="wimToken" value="17302928"><input type="hidden" name="ID"><td nowrap="" align="right" valign="middle" width="25"><div class="commandLabel"><a class="commandLabel" onmouseover="changeImage(helpButton,&#39;img9999&#39;,0)" onmouseout="changeImage(helpButton,&#39;img9999&#39;,1)" href="javascript:toHelp(&#39;..&#39;,&#39;inf00006.html&#39;)"><nobr><img border="0" src="./Licznik_files/helpBtnSetting.gif" name="img9999" align="absmiddle" alt="Pomoc" title="Pomoc"></nobr></a></div></td><td width="5px"><img src="./Licznik_files/spacer.gif" width="5px" border="0" alt="" title=""></td></tr></tbody></table></td></tr><tr><td><img src="./Licznik_files/spacer.gif" width="12" border="0" alt="" title=""></td><td><table width="100%" border="0" cellspacing="0" cellpadding="0" class="settingDivision"><tbody><tr><td><img src="./Licznik_files/settingDivision.gif" alt="" title=""></td></tr></tbody></table></td></tr><tr><td height="15px"><img src="./Licznik_files/spacer.gif" width="12" border="0" alt="" title=""></td></tr></tbody></table><table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td width="12px"><img src="./Licznik_files/spacer.gif" width="12px" border="0" alt="" title=""></td><td align="left" valign="top" style="padding-bottom:20px;"><table border="0" cellspacing="0" cellpadding="0"><tbody><tr class="staticProp"><td><table border="0" cellspacing="0" cellpadding="0"><tbody><tr><td><table width="100%" class="defaultTableButton" cellspacing="0"><tbody><tr><td class="defaultTableButton" onclick="javascript:wsMenu_jumpUrl(&#39;../../websys/webArch/topPage.cgi&#39;); return false;" height="20"><a href="javascript:wsMenu_jumpUrl(&#39;../../websys/webArch/topPage.cgi&#39;)" class="defaultTableCommandButton">Wstecz</a></td></tr></tbody></table></td></tr><tr><td nowrap="" width="1" height="1"><img src="./Licznik_files/spacer.gif" height="1" width="100" border="0" alt="" title=""></td></tr></tbody></table></td></tr></tbody></table><table width="100%" border="0" cellspacing="0" cellpadding="0" class="settingDivision"><tbody><tr><td><img src="./Licznik_files/settingDivision.gif" alt="" title=""></td></tr></tbody></table></td></tr></tbody></table><table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td width="12px"><img src="./Licznik_files/spacer.gif" width="12px" border="0" alt="" title=""></td><td align="left" valign="top" style="padding-bottom:20px;"><table><tbody><tr class="staticProp"><td nowrap=""><img src="./Licznik_files/settingBullet.gif" alt="" title=""></td><td nowrap="" align="left">Ogółem</td><td nowrap="">:</td><td nowrap="">290439</td><td></td></tr></tbody></table><br><table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td nowrap="" width="0"></td><td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0"><tbody><tr><td height="4"></td></tr><tr bgcolor="#becfe6"><td nowrap="" width="12" height="24" align="left" valign="top"></td><td nowrap="" width="100%" align="left" valign="middle"><div class="standard" style="font-weight:bold;">Kopiarka</div></td><td nowrap="" align="left" valign="middle" width="20"><div class="commandLabel"><a class="commandLabel" onmouseover="changeImage(buttonImg,&#39;imgAPL_COPY&#39;,1)" onmouseout="changeImage(buttonImg,&#39;imgAPL_COPY&#39;,0)" href="http://192.168.20.52/web/guest/pl/websys/status/getUnificationCounter.cgi#link00"><nobr><img border="0" src="./Licznik_files/gotoPageTop.gif" name="imgAPL_COPY" align="absmiddle" alt="Początek strony" title="Początek strony"></nobr></a></div></td></tr><tr><td height="4"></td></tr></tbody></table></td></tr></tbody></table><table><tbody><tr class="staticProp"><td nowrap=""><img src="./Licznik_files/settingBullet.gif" alt="" title=""></td><td nowrap="" align="left">Czarno - białe</td><td nowrap="">:</td><td nowrap="">54158</td><td></td></tr><tr class="staticProp"><td nowrap=""><img src="./Licznik_files/settingBullet.gif" alt="" title=""></td><td nowrap="" align="left">Pełnokolorowe</td><td nowrap="">:</td><td nowrap="">28817</td><td></td></tr><tr class="staticProp"><td nowrap=""><img src="./Licznik_files/settingBullet.gif" alt="" title=""></td><td nowrap="" align="left">Jednokolorowe</td><td nowrap="">:</td><td nowrap="">0</td><td></td></tr><tr class="staticProp"><td nowrap=""><img src="./Licznik_files/settingBullet.gif" alt="" title=""></td><td nowrap="" align="left">Dwukolorowe</td><td nowrap="">:</td><td nowrap="">0</td><td></td></tr></tbody></table><br><table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td nowrap="" width="0"></td><td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0"><tbody><tr><td height="4"></td></tr><tr bgcolor="#becfe6"><td nowrap="" width="12" height="24" align="left" valign="top"></td><td nowrap="" width="100%" align="left" valign="middle"><div class="standard" style="font-weight:bold;">Drukarka</div></td><td nowrap="" align="left" valign="middle" width="20"><div class="commandLabel"><a class="commandLabel" onmouseover="changeImage(buttonImg,&#39;imgAPL_PRN&#39;,1)" onmouseout="changeImage(buttonImg,&#39;imgAPL_PRN&#39;,0)" href="http://192.168.20.52/web/guest/pl/websys/status/getUnificationCounter.cgi#link00"><nobr><img border="0" src="./Licznik_files/gotoPageTop.gif" name="imgAPL_PRN" align="absmiddle" alt="Początek strony" title="Początek strony"></nobr></a></div></td></tr><tr><td height="4"></td></tr></tbody></table></td></tr></tbody></table><table><tbody><tr class="staticProp"><td nowrap=""><img src="./Licznik_files/settingBullet.gif" alt="" title=""></td><td nowrap="" align="left">Czarno - białe</td><td nowrap="">:</td><td nowrap="">103212</td><td></td></tr><tr class="staticProp"><td nowrap=""><img src="./Licznik_files/settingBullet.gif" alt="" title=""></td><td nowrap="" align="left">Pełnokolorowe</td><td nowrap="">:</td><td nowrap="">102481</td><td></td></tr><tr class="staticProp"><td nowrap=""><img src="./Licznik_files/settingBullet.gif" alt="" title=""></td><td nowrap="" align="left">Jednokolorowe</td><td nowrap="">:</td><td nowrap="">0</td><td></td></tr><tr class="staticProp"><td nowrap=""><img src="./Licznik_files/settingBullet.gif" alt="" title=""></td><td nowrap="" align="left">Dwukolorowe</td><td nowrap="">:</td><td nowrap="">1771</td><td></td></tr></tbody></table><br><table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td nowrap="" width="0"></td><td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0"><tbody><tr><td height="4"></td></tr><tr bgcolor="#becfe6"><td nowrap="" width="12" height="24" align="left" valign="top"></td><td nowrap="" width="100%" align="left" valign="middle"><div class="standard" style="font-weight:bold;">Faks</div></td><td nowrap="" align="left" valign="middle" width="20"><div class="commandLabel"><a class="commandLabel" onmouseover="changeImage(buttonImg,&#39;imgAPL_FAX&#39;,1)" onmouseout="changeImage(buttonImg,&#39;imgAPL_FAX&#39;,0)" href="http://192.168.20.52/web/guest/pl/websys/status/getUnificationCounter.cgi#link00"><nobr><img border="0" src="./Licznik_files/gotoPageTop.gif" name="imgAPL_FAX" align="absmiddle" alt="Początek strony" title="Początek strony"></nobr></a></div></td></tr><tr><td height="4"></td></tr></tbody></table></td></tr></tbody></table><table><tbody><tr class="staticProp"><td nowrap=""><img src="./Licznik_files/settingBullet.gif" alt="" title=""></td><td nowrap="" align="left">Czarno - białe</td><td nowrap="">:</td><td nowrap="">0</td><td></td></tr></tbody></table><br><table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td nowrap="" width="0"></td><td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0"><tbody><tr><td height="4"></td></tr><tr bgcolor="#becfe6"><td nowrap="" width="12" height="24" align="left" valign="top"></td><td nowrap="" width="100%" align="left" valign="middle"><div class="standard" style="font-weight:bold;">Ogółem wysłane/nadane</div></td><td nowrap="" align="left" valign="middle" width="20"><div class="commandLabel"><a class="commandLabel" onmouseover="changeImage(buttonImg,&#39;imgCNT_TRANS_TOTAL&#39;,1)" onmouseout="changeImage(buttonImg,&#39;imgCNT_TRANS_TOTAL&#39;,0)" href="http://192.168.20.52/web/guest/pl/websys/status/getUnificationCounter.cgi#link00"><nobr><img border="0" src="./Licznik_files/gotoPageTop.gif" name="imgCNT_TRANS_TOTAL" align="absmiddle" alt="Początek strony" title="Początek strony"></nobr></a></div></td></tr><tr><td height="4"></td></tr></tbody></table></td></tr></tbody></table><table><tbody><tr class="staticProp"><td nowrap=""><img src="./Licznik_files/settingBullet.gif" alt="" title=""></td><td nowrap="" align="left">Czarno - białe</td><td nowrap="">:</td><td nowrap="">15155</td><td></td></tr><tr class="staticProp"><td nowrap=""><img src="./Licznik_files/settingBullet.gif" alt="" title=""></td><td nowrap="" align="left">Kolorowe</td><td nowrap="">:</td><td nowrap="">4200</td><td></td></tr></tbody></table><br><table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td nowrap="" width="0"></td><td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0"><tbody><tr><td height="4"></td></tr><tr bgcolor="#becfe6"><td nowrap="" width="12" height="24" align="left" valign="top"></td><td nowrap="" width="100%" align="left" valign="middle"><div class="standard" style="font-weight:bold;">Nadawanie faksu</div></td><td nowrap="" align="left" valign="middle" width="20"><div class="commandLabel"><a class="commandLabel" onmouseover="changeImage(buttonImg,&#39;imgCNT_TRANS_FAX&#39;,1)" onmouseout="changeImage(buttonImg,&#39;imgCNT_TRANS_FAX&#39;,0)" href="http://192.168.20.52/web/guest/pl/websys/status/getUnificationCounter.cgi#link00"><nobr><img border="0" src="./Licznik_files/gotoPageTop.gif" name="imgCNT_TRANS_FAX" align="absmiddle" alt="Początek strony" title="Początek strony"></nobr></a></div></td></tr><tr><td height="4"></td></tr></tbody></table></td></tr></tbody></table><table><tbody><tr class="staticProp"><td nowrap=""><img src="./Licznik_files/settingBullet.gif" alt="" title=""></td><td nowrap="" align="left">Ogółem</td><td nowrap="">:</td><td nowrap="">0</td><td></td></tr></tbody></table><br><table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td nowrap="" width="0"></td><td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0"><tbody><tr><td height="4"></td></tr><tr bgcolor="#becfe6"><td nowrap="" width="12" height="24" align="left" valign="top"></td><td nowrap="" width="100%" align="left" valign="middle"><div class="standard" style="font-weight:bold;">Skaner - wysłane</div></td><td nowrap="" align="left" valign="middle" width="20"><div class="commandLabel"><a class="commandLabel" onmouseover="changeImage(buttonImg,&#39;imgCNT_TRANS_SCAN&#39;,1)" onmouseout="changeImage(buttonImg,&#39;imgCNT_TRANS_SCAN&#39;,0)" href="http://192.168.20.52/web/guest/pl/websys/status/getUnificationCounter.cgi#link00"><nobr><img border="0" src="./Licznik_files/gotoPageTop.gif" name="imgCNT_TRANS_SCAN" align="absmiddle" alt="Początek strony" title="Początek strony"></nobr></a></div></td></tr><tr><td height="4"></td></tr></tbody></table></td></tr></tbody></table><table><tbody><tr class="staticProp"><td nowrap=""><img src="./Licznik_files/settingBullet.gif" alt="" title=""></td><td nowrap="" align="left">Czarno - białe</td><td nowrap="">:</td><td nowrap="">15155</td><td></td></tr><tr class="staticProp"><td nowrap=""><img src="./Licznik_files/settingBullet.gif" alt="" title=""></td><td nowrap="" align="left">Kolorowe</td><td nowrap="">:</td><td nowrap="">4200</td><td></td></tr></tbody></table><br><table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td nowrap="" width="0"></td><td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0"><tbody><tr><td height="4"></td></tr><tr bgcolor="#becfe6"><td nowrap="" width="12" height="24" align="left" valign="top"></td><td nowrap="" width="100%" align="left" valign="middle"><div class="standard" style="font-weight:bold;">Pokrycie</div></td><td nowrap="" align="left" valign="middle" width="20"><div class="commandLabel"><a class="commandLabel" onmouseover="changeImage(buttonImg,&#39;imgCNT_COVERAGE&#39;,1)" onmouseout="changeImage(buttonImg,&#39;imgCNT_COVERAGE&#39;,0)" href="http://192.168.20.52/web/guest/pl/websys/status/getUnificationCounter.cgi#link00"><nobr><img border="0" src="./Licznik_files/gotoPageTop.gif" name="imgCNT_COVERAGE" align="absmiddle" alt="Początek strony" title="Początek strony"></nobr></a></div></td></tr><tr><td height="4"></td></tr></tbody></table></td></tr></tbody></table><table><tbody><tr class="staticProp"><td nowrap=""><img src="./Licznik_files/settingBullet.gif" alt="" title=""></td><td nowrap="" align="left">Kopiarka</td><td nowrap=""></td></tr><tr class="staticProp"><td nowrap=""></td><td nowrap="" align="left">Pokrycie czarno-białe</td><td nowrap="">:</td><td nowrap="">188059</td><td>%</td></tr><tr class="staticProp"><td nowrap=""></td><td nowrap="" align="left">Pokrycie jednokolorowe</td><td nowrap="">:</td><td nowrap="">0</td><td>%</td></tr><tr class="staticProp"><td nowrap=""></td><td nowrap="" align="left">Pokrycie dwukolorowe</td><td nowrap="">:</td><td nowrap="">0</td><td>%</td></tr><tr class="staticProp"><td nowrap=""></td><td nowrap="" align="left">Pokrycie pełnokolorowe</td><td nowrap="">:</td><td nowrap="">274425</td><td>%</td></tr></tbody></table><table><tbody><tr class="staticProp"><td nowrap=""><img src="./Licznik_files/settingBullet.gif" alt="" title=""></td><td nowrap="" align="left">Drukarka</td><td nowrap=""></td></tr><tr class="staticProp"><td nowrap=""></td><td nowrap="" align="left">Pokrycie czarno-białe</td><td nowrap="">:</td><td nowrap="">349947</td><td>%</td></tr><tr class="staticProp"><td nowrap=""></td><td nowrap="" align="left">Pokrycie jednokolorowe</td><td nowrap="">:</td><td nowrap="">0</td><td>%</td></tr><tr class="staticProp"><td nowrap=""></td><td nowrap="" align="left">Pokrycie dwukolorowe</td><td nowrap="">:</td><td nowrap="">12742</td><td>%</td></tr><tr class="staticProp"><td nowrap=""></td><td nowrap="" align="left">Pokrycie pełnokolorowe</td><td nowrap="">:</td><td nowrap="">1633908</td><td>%</td></tr></tbody></table><table><tbody><tr class="staticProp"><td nowrap=""><img src="./Licznik_files/settingBullet.gif" alt="" title=""></td><td nowrap="" align="left">Faks</td><td nowrap=""></td></tr><tr class="staticProp"><td nowrap=""></td><td nowrap="" align="left">Pokrycie czarno-białe</td><td nowrap="">:</td><td nowrap="">0</td><td>%</td></tr></tbody></table><br><table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td nowrap="" width="0"></td><td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0"><tbody><tr><td height="4"></td></tr><tr bgcolor="#becfe6"><td nowrap="" width="12" height="24" align="left" valign="top"></td><td nowrap="" width="100%" align="left" valign="middle"><div class="standard" style="font-weight:bold;">Inne funkcje(a)</div></td><td nowrap="" align="left" valign="middle" width="20"><div class="commandLabel"><a class="commandLabel" onmouseover="changeImage(buttonImg,&#39;imgUA_EXTRA_FUNC&#39;,1)" onmouseout="changeImage(buttonImg,&#39;imgUA_EXTRA_FUNC&#39;,0)" href="http://192.168.20.52/web/guest/pl/websys/status/getUnificationCounter.cgi#link00"><nobr><img border="0" src="./Licznik_files/gotoPageTop.gif" name="imgUA_EXTRA_FUNC" align="absmiddle" alt="Początek strony" title="Początek strony"></nobr></a></div></td></tr><tr><td height="4"></td></tr></tbody></table></td></tr></tbody></table><table><tbody><tr class="staticProp"><td nowrap=""><img src="./Licznik_files/settingBullet.gif" alt="" title=""></td><td nowrap="" align="left">A3/DLT</td><td nowrap="">:</td><td nowrap="">13589</td><td></td></tr><tr class="staticProp"><td nowrap=""><img src="./Licznik_files/settingBullet.gif" alt="" title=""></td><td nowrap="" align="left">Dupleks</td><td nowrap="">:</td><td nowrap="">80109</td><td></td></tr></tbody></table><br></td></tr></tbody></table><table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td width="12px"><img src="./Licznik_files/spacer.gif" width="12px" border="0" alt="" title=""></td><td align="left" valign="top" style="padding-bottom:20px;"><table width="100%" border="0" cellspacing="0" cellpadding="0" class="settingDivision"><tbody><tr><td><img src="./Licznik_files/settingDivision.gif" alt="" title=""></td></tr></tbody></table><table border="0" cellspacing="0" cellpadding="0"><tbody><tr class="staticProp"><td><table border="0" cellspacing="0" cellpadding="0"><tbody><tr><td><table width="100%" class="defaultTableButton" cellspacing="0"><tbody><tr><td class="defaultTableButton" onclick="javascript:wsMenu_jumpUrl(&#39;../../websys/webArch/topPage.cgi&#39;); return false;" height="20"><a href="javascript:wsMenu_jumpUrl(&#39;../../websys/webArch/topPage.cgi&#39;)" class="defaultTableCommandButton">Wstecz</a></td></tr></tbody></table></td></tr><tr><td nowrap="" width="1" height="1"><img src="./Licznik_files/spacer.gif" height="1" width="100" border="0" alt="" title=""></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table>
+</body></html>

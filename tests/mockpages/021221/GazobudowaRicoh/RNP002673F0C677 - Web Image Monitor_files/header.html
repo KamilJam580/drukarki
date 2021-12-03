@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
+<!-- saved from url=(0060)http://192.168.20.101/web/guest/pl/websys/webArch/header.cgi -->
+<html lang="pl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Nagłówek</title>
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="-1">
+    
+    <meta http-equiv="Content-Script-Type" content="text/javascript">
+    <meta http-equiv="Content-Style-Type" content="text/css">
+    <link xmlns:axsl="http://localhost" href="./common.css" type="text/css" rel="stylesheet">
+    <link xmlns:axsl="http://localhost" href="./frame.css" type="text/css" rel="stylesheet" media="all">
+    <link xmlns:axsl="http://localhost" href="./header.css" type="text/css" rel="stylesheet" media="all">
+    <link xmlns:axsl="http://localhost" href="./cmnParts.css" type="text/css" rel="stylesheet" media="all">
+    <style xmlns:axsl="http://localhost" type="text/css"></style>
+    <script xmlns:axsl="http://localhost" language="JavaScript" src="./jquery.1.4.js.pobierz" type="text/javascript"></script>
+    <script xmlns:axsl="http://localhost" language="JavaScript" src="./jquery.ui.core.1.4.js.pobierz" type="text/javascript"></script>
+    <script xmlns:axsl="http://localhost" language="JavaScript" src="./jquery.ui.widget.1.4.js.pobierz" type="text/javascript"></script>
+    <script xmlns:axsl="http://localhost" language="JavaScript" src="./jquery.ui.mouse.1.4.js.pobierz" type="text/javascript"></script>
+    <script xmlns:axsl="http://localhost" language="JavaScript" src="./jquery.ui.draggable.1.4.js.pobierz" type="text/javascript"></script>
+    <script xmlns:axsl="http://localhost" language="JavaScript" src="./jquery.ui.droppable.1.4.js.pobierz" type="text/javascript"></script>
+    <script xmlns:axsl="http://localhost" language="javascript" src="./head_rollover.js.pobierz" type="text/javascript"></script>
+    <script xmlns:axsl="http://localhost" language="JavaScript">
+	function changeImage(id, img){
+	  document.images[id].src = "/images/" + img;
+	}
+
+	function openNewWindow(target, windowName) {
+		window.open(target, windowName);
+	}
+
+	function openDiaglogWindow(target, windowName, option) {
+		var opt="toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes".concat(option);
+		window.open(target, windowName, opt);
+	}
+	
+	function headerResize()
+	{
+		var mainWidth = "100%";
+		if( 800 > $(window).width() )
+		{
+			mainWidth= "800px";
+		}
+		$("#frameHead").width(mainWidth);
+	}
+
+	if (!/*@cc_on!@*/false)
+	{
+	}
+	else
+	{
+		$(document).ready(function()
+		{
+			headerResize();
+			window.onresize = headerResize;
+		});
+	}
+	
+</script>
+  </head>
+  <body marginwidth="0" marginheight="0">
+    <div xmlns:axsl="http://localhost" id="frameHead">
+      <div id="logoArea">
+        <div id="logo">
+          <h1><img src="./RICOH.gif" width="104" height="30" alt="RICOH" title="RICOH" class="ver-algn-b"></h1>
+          <h2 id="modelName" style="z-index:1;">MP C2011</h2>
+          <h3 id="tradeName">Web Image Monitor</h3>
+        </div>
+      </div>
+      <div id="rightArea" style="z-index:1000;">
+        <div class="headerSlope"><img src="./headerSlope.gif" width="140" height="48" alt=""></div>
+        <div id="rightAreaBox">
+          <div class="contentsIconArea clear">
+            <ul class="float-r">
+              <li>
+                <a href="http://192.168.20.101/web/guest/pl/websys/webArch/waSearchFirst.cgi" onclick="parent.work.location=&#39;/web/guest/pl/websys/webArch/waSearchFirst.cgi&#39;; return false;" class="rollover"><img src="./headerBtnSch.gif" alt="Wyszukiwanie słów kluczowych" name="searchBtn" width="27" height="20" id="searchBtn" title="Wyszukiwanie słów kluczowych"></a>
+              </li>
+              <li>
+                <a href="http://192.168.20.101/web/guest/pl/websys/websys/webArch/help.cgi?ID=index.html" onclick="openDiaglogWindow(&#39;../websys/webArch/help.cgi?ID=index.html&#39;, &#39;new&#39;, &#39;&#39;); return false;" class="rollover"><img src="./headerBtnHelp.gif" alt="Pomoc" name="helpBtn" width="27" height="20" id="helpBtn" title="Pomoc"></a>
+              </li>
+              <li>
+                <a href="http://192.168.20.101/web/guest/pl/websys/webArch/aboutWim.cgi" onclick="openDiaglogWindow(&#39;/web/guest/pl/websys/webArch/aboutWim.cgi&#39;, &#39;aboutWimWnd&#39;, &#39;,width=460,height=320,scrollbars=no&#39;); return false;" class="rollover"><img src="./headerBtnVersionInfo.gif" alt="Informacja o wersji" name="aboutBtn" width="27" height="20" id="aboutBtn" title="Informacja o wersji"></a>
+              </li>
+              <li>
+                <a href="http://192.168.20.101/web/guest/pl/websys/webArch/authForm.cgi" onclick="top.location=&#39;/web/guest/pl/websys/webArch/authForm.cgi&#39;; return false;" class="rollover"><img src="./headerBtnLogOn.gif" alt="" name="loginBtn" width="27" height="20" id="loginBtn" class="rollover mgn-R5px ver-algn-m"><span class="txt-clr-e5e5e5 mgn-R5px">Logowanie</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="loginNameArea">
+            <ul class="float-r">
+              <li class="fw-b mgn-L10px mgn-R5px ie-mgn-T3px"></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div xmlns:axsl="http://localhost" id="breadCrumb">
+      <ul>
+        <li>
+          <a class="rollover" onclick="
+							parent.work.location=&#39;/web/guest/pl/websys/webArch/topPage.cgi&#39;; return false;
+						" href="http://192.168.20.101/web/guest/pl/websys/webArch/topPage.cgi"><img src="./headerBtnBack.gif" alt="" name="headerBtnBack" width="4" height="12" id="headerBtnBack" class="mgn-R5px ver-algn-m">Strona główna</a>
+        </li>
+      </ul>
+    </div>
+  
+
+</body></html>

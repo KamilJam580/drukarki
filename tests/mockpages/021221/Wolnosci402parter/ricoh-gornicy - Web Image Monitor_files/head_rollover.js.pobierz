@@ -1,0 +1,88 @@
+function mouseOverTransfer(parent)
+{
+	parent.addClass("hover");
+	
+	parent.find("img").each(function()
+	{
+		var imageSrc = $(this).attr("src");
+		if( imageSrc.indexOf("-r.gif") > 0 )
+		{
+			return;
+		}
+		$(this).attr("src",imageSrc.replace(".gif", "-r.gif"));
+	});
+}
+
+function mouseOutTransfer(parent)
+{
+	parent.removeClass("hover");
+	
+	parent.find("img").each(function()
+	{
+		var imageSrc = $(this).attr("src");
+		$(this).attr("src",imageSrc.replace("-r.gif",".gif"));
+	});
+}
+
+function menuTextCorrect(){
+	var menu = document.getElementById("sideColumn");
+	if( !menu ) return;
+	var tags = menu.getElementsByTagName("span");
+
+	if (typeof document.body.style.maxHeight != "undefined") {
+		if (!/*@cc_on!@*/false)
+		{
+		}
+		else if (document.documentMode >=8)
+		{
+			return false;
+		}
+		else
+		{
+			for(var i=0; i < tags.length; i++){
+				var m = tags[i].className;
+				if(m == "menuText"){
+					var m = tags[i].offsetHeight;
+					if(m < 20){
+						tags[i].style.top = '11px';
+					}
+					else{
+						tags[i].style.top = '5px';
+					}
+				}
+			}
+		}
+	} else {
+		for(var i=0; i < tags.length; i++){
+			var m = tags[i].className;
+			if(m == "menuText"){
+				var m = tags[i].offsetHeight;
+				if(m < 20){
+					tags[i].style.top = '10px';
+				}
+				else{
+					tags[i].style.top = '5px';
+				}
+			}
+		}
+	}
+}
+
+jQuery(function($)
+{
+	var anchors = $("a.rollover");
+	anchors.mouseover(function()
+	{
+		mouseOverTransfer($(this));
+	});
+	anchors.click(function()
+	{
+		mouseOverTransfer($(this));
+	});
+	anchors.mouseout(function()
+	{
+		mouseOutTransfer($(this));
+	});
+	menuTextCorrect();
+});
+

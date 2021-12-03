@@ -1,0 +1,96 @@
+var myInterval;
+function judge_refresh(val)
+{
+var judge;
+
+judge = getCookie("refresh_judge");
+if ( judge == "on" )
+{
+refreshLCD(val);
+}
+}
+function refreshLCD(val)
+{
+var judge;
+judge = (val > 0) ? "on" : "off";
+clearInterval(myInterval);
+setCookie("refresh_judge", judge);
+UpdateLCD();
+if(judge == "on")
+{
+if(window.XMLHttpRequest)
+{
+myInterval = setInterval("UpdateLCD()", val);
+}
+else if(window.ActiveXObject)
+{
+myInterval = setInterval("UpdateLCD()", val, "JavaScript");
+}
+}
+}
+function UpdateLCD()
+{
+var date_url    = location.href;
+date_url        = date_url.substring(0, date_url.indexOf("status.html")) + "monitor.html";
+var date_id     = "moni_data";
+var date_start  = "monitor_start";
+var date_end    = "monitor_end";
+var date_result = request_http(date_url, date_id, date_start, date_end, null);
+if(date_result)
+{
+return;
+}
+}
+function request_http(url, id, range_start, range_end, callback)
+{
+var request;
+if(window.XMLHttpRequest)
+{
+request = new XMLHttpRequest();
+if(request.overrideMimeType)
+{
+request.overrideMimeType("text/html");
+}
+}
+else if(window.ActiveXObject)
+{
+try
+{
+request = new ActiveXObject("Msxml2.XMLHTTP");
+}
+catch(e)
+{
+try
+{
+request = new ActiveXObject("Microsoft.XMLHTTP");
+}
+catch(e)
+{
+return false;
+}
+}
+}
+request.onreadystatechange = function ()
+{
+if((request.readyState == 4) && (request.status == 200))
+{
+update_data(request.responseText, id, range_start, range_end);
+request.onreadystatechange = empty_function;
+if(callback != null) callback();
+}
+};
+request.open("GET", url, true);
+request.send(null);
+return true;
+}
+function update_data(new_page, id, range_start, range_end)
+{
+var hidden_start = "\" />";
+var hidden_end = "<input type=\"hidden\" name=\"";
+var start = new_page.indexOf(range_start) + range_start.length + hidden_start.length;
+var end = new_page.lastIndexOf(range_end) - hidden_end.length;
+document.getElementById(id).innerHTML = new_page.substring(start, end);
+}
+function empty_function()
+{
+}

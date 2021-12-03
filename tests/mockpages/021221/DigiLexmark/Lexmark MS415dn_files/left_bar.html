@@ -1,0 +1,180 @@
+
+<!-- saved from url=(0050)http://192.168.20.81/cgi-bin/dynamic/left_bar.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script language="JAVASCRIPT">
+  function navClick(rowId)
+  {
+      var selected="";
+      var e2 = document.getElementById("Config");
+      var e3 = document.getElementById("Information");
+      var e4 = document.getElementById("Linksindex")
+      var e1 = document.getElementById("Top1");
+      var e7 = document.getElementById("Top2");
+      var e8 = document.getElementById("Top3");
+      var e12 = document.getElementById("Top4");
+      var e13 = document.getElementById("Top5");
+      var e9 = document.getElementById("Bottom1");
+      var e10 = document.getElementById("Bottom2");
+      var e11 = document.getElementById("Bottom3");
+      var e14 = document.getElementById("Bottom4");
+      var e15 = document.getElementById("Bottom5");
+      if (e1 != null)
+      {
+            e1.className = "not_selected";
+      }
+      if (e7 != null)
+      {
+            e7.className = "not_selected";
+      }
+      if (e8 != null)
+      {
+            e8.className = "not_selected";
+      }
+      if (e9 != null)
+      {
+            e9.className = "not_selected";
+      }
+      if (e10 != null)
+      {
+            e10.className = "not_selected";
+      }
+      if (e11 != null)
+      {
+            e11.className = "not_selected";
+      }
+      if (e12 != null)
+      {
+            e12.className = "not_selected";
+      }
+      if (e13 != null)
+      {
+            e13.className = "not_selected";
+      }
+      if (e14 != null)
+      {
+            e14.className = "not_selected";
+      }
+      if (e15 != null)
+      {
+            e15.className = "not_selected";
+      }
+      if (e2 != null)
+      {
+            e2.className = "not_selected";
+      }
+      if (e3 != null)
+      {
+            e3.className = "not_selected";
+      }
+      if (e4 != null)
+      {
+            e4.className = "not_selected";
+      }
+      var loc = this.document.location;
+      var loc_str = loc.toString();
+      var elem;
+      marker_used = document.getElementById("selected_marker_used");
+      if ((marker_used != null) && (marker_used.value == 0) && (loc_str.match("selected") != null))
+      {
+          var temp = loc_str.split('=');
+          for(i=0;i<temp.length;i++)
+          {
+            if(temp[i].toString().match('selected'))
+            {
+                selected = temp[i+1];
+            }
+            elem = document.getElementById(selected);
+          }
+      }
+      else
+      {
+        elem = document.getElementById(rowId);
+      }
+      marker_used.value = 1;
+      if (elem != null)
+      {
+            elem.className = "selected";
+      }
+ }
+</script>
+<style type="text/css">
+.invisible {display:none;}
+.visible {display:block;}
+
+</style>
+
+<meta name="PAGE_TYPE" content="Menu">
+<title>Left Bar</title>
+<!--<base target="Main">--><base href="." target="Main">
+<link rel="stylesheet" href="./configStyle.css" type="text/css">
+</head>
+<body onload="navClick(&#39;Top1&#39;)" class="left_menu">
+
+
+  <p align="CENTER"><a href="http://www.lexmark.com/" rel="nofollow" target="_blank"><img border="0" src="./lexlogo.gif"></a></p>
+  <br>
+
+<div class="left_menu">
+<table class="left_menu">
+
+<tbody><tr class="selected" id="Top1"><td class="left_menu_item">
+<a href="http://192.168.20.81/cgi-bin/dynamic/printer/PrinterStatus.html" onclick="navClick(&#39;Top1&#39;)"><b>Stan urządzenia</b></a>
+</td></tr>
+<tr class="spacer"><td></td></tr>
+<tr class="not_selected" id="Top2"><td class="left_menu_item">
+<a href="http://192.168.20.81/cgi-bin/dynamic/printer/config/gen/copy_printer_settings.html" onclick="navClick(&#39;Top2&#39;)"><b>Kopiuj ustaw. drukarki</b></a>
+</td></tr>
+<tr class="spacer"><td></td></tr>
+
+<tr class="not_selected" id="Config"><td class="left_menu_item">
+<a href="http://192.168.20.81/cgi-bin/dynamic/config/config.html" onclick="navClick(&#39;Config&#39;)"><b>Ustawienia</b></a>
+</td></tr>
+<tr class="spacer"><td></td></tr>
+<tr class="not_selected" id="Information"><td class="left_menu_item">
+<a href="http://192.168.20.81/cgi-bin/dynamic/reports_and_information.html" rel="nofollow" onclick="navClick(&#39;Information&#39;)"><b>Raporty</b></a>
+</td></tr>
+<tr class="spacer"><td></td></tr>
+<tr class="not_selected" id="Linksindex"><td class="left_menu_item">
+<a href="http://192.168.20.81/cgi-bin/dynamic/linksindex.html" onclick="navClick(&#39;Linksindex&#39;)"><b>Łącza i indeks</b></a>
+</td></tr>
+<tr class="spacer"><td></td></tr>
+<tr class="not_selected" id="Bottom1"><td class="left_menu_item">
+<a href="http://192.168.20.81/cgi-bin/dynamic/printer/config/remote_oppanel.html" onclick="navClick(&#39;Bottom1&#39;)"><b>Panel zdalnego operatora</b></a>
+</td></tr>
+<tr class="spacer"><td></td></tr>
+
+
+
+<tr><td><br></td></tr>
+
+</tbody></table>
+
+
+<table class="left_menu">
+<tbody><tr class="not_selected"><td class="left_menu_item"><a href="http://www.lexmark.com/MD/?func=supplies&amp;lang=19&amp;prtr=B152040&amp;src=3&amp;creg=0020&amp;ctry=00000415" target="_blank"><b>Zamów materiały eksploatacyjne</b></a></td></tr>
+</tbody></table>
+
+
+
+<br>
+
+
+
+
+<div class="invisible" id="logout_div">
+
+<table class="left_menu">
+<tbody><tr class="not_selected" id="Last1"><td class="left_menu_item" style="background:#e0e0e0;text-align:right;padding-right:8px;">
+<a href="http://192.168.20.81/cgi-bin/dynamic/printer/logout.html" rel="nofollow"><b>Wyloguj</b></a>
+</td></tr>
+</tbody></table>
+</div>
+
+</div>
+<form id="frame_info">
+<input type="hidden" name="selected_marker_used" id="selected_marker_used" value="1">
+</form>
+
+
+
+</body></html>

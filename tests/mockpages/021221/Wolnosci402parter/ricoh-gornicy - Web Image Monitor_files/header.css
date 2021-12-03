@@ -1,0 +1,145 @@
+@charset "utf-8";
+
+
+/* =============== Logo leftArea =============== */
+#frameHead {
+	width: 100%;
+	min-width: 800px;
+	position: absolute;
+	top:0px;
+	left:0px;
+	z-index:10;
+}
+#logoArea {
+	background: #fff url(/images/logoBG.gif) repeat-x top left;
+	position:absolute;
+	top:0px;
+	left:0px;
+	width: 100%;
+	min-width: 800px;
+	height: 48px;
+}
+
+#logoArea h1,
+#logoArea h2,
+#logoArea h3 {
+	display: inline;
+	vertical-align: bottom;
+}
+#logo {
+	position:absolute;
+	top:8px;
+	left:15px;
+	text-align: left;
+	height: 30px;
+	line-height: 30px;
+}
+#modelName {
+	padding: 0 10px;
+	color: #474747;
+	font: 900 normal 20px arial, helvetica;
+}
+#tradeName {
+	padding: 0;
+	color: #474747;
+	font: 16px arial, helvetica;
+	margin: 0;
+}
+
+/* =============== rightArea =============== */
+#rightArea {
+	background: url(/images/headerBG.gif) repeat-x left top;
+	width: 450px;
+	height: 48px;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	z-index:100;
+}
+/* ie hack */	
+* html #rightArea {
+	right: -1px;
+}
+*:first-child+html #rightArea {
+	right: -1px;
+}
+.headerSlope {
+	width: 140px;
+	display: inline;
+	float: left;
+}
+#rightAreaBox {
+	width: 300px;
+	padding: 3px;
+	float: right;
+}
+/* ie hack */
+.contentsIconArea {
+	min-width: 30px;
+	height: 25px;
+}
+/* ie hack */	
+.contentsIconArea:after {
+    content: "";
+    clear: both;
+    height: 0;
+    display: block;
+    visibility: hidden;
+}
+#rightArea .contentsIconArea ul li {
+	padding: 0 0 0 10px;
+	background: url(/images/headerBGspline.gif) no-repeat 5px -2px;
+	float: left;
+}
+#rightArea .contentsIconArea ul li a:hover {
+	text-decoration: underline;
+	color: #fff;
+} 
+.loginNameArea {
+	min-width: 30px;
+	height: 23px;
+}
+/* ie hack */	
+* html .loginNameArea {
+	height: 23px;
+}
+/* ie hack */	
+* html #rightArea .loginNameArea ul li{
+	padding-top:2px;
+}
+#rightArea .loginNameArea ul li {
+	float: left;
+	padding-top:2px;
+}
+/* ie hack */	
+* html .ie-mgn-T3px{
+	margin-top: 3px;
+}
+
+
+/* =============== breadCrumb =============== */
+#breadCrumb {
+	position:absolute;
+	top:48px;
+	left:0px;
+	width: 100%;
+	min-width: 800px;
+	background: #e7e8ec;
+	height: 15px;
+	border-bottom: 1px solid #999;
+	text-align:left;
+}
+#breadCrumb li {
+	padding: 1px 0 0 15px;
+	float: left;
+}
+/* ie6 hack */
+* html #breadCrumb li {
+	padding: 0 0 0 15px;
+	float: left;
+}
+
+/* =============== for IE6 =============== */
+* html body {
+	background: url(/images/headerBG.gif) repeat-x left top; 
+}
